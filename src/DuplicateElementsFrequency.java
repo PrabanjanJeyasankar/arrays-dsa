@@ -4,7 +4,7 @@ import java.util.Map;
 public class DuplicateElementsFrequency {
     public static void main(String[] args) {
         // Test cases
-        int[] testCase1 = {1, 4, 7, 1, 5, 4 , 7, 5, 1}; // Multiple duplicates
+        int[] testCase1 = {1, 4, 7, 1, 5, 3, 4 , 7, 5, 1}; // Multiple duplicates
         int[] testCase2 = {1, 2, 3, 4, 5}; // All unique
         int[] testCase3 = {2, 2, 2, 2}; // All same
         int[] testCase4 = {}; // Empty array
@@ -41,16 +41,21 @@ public class DuplicateElementsFrequency {
             frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
         }
 
-        boolean hasDuplicates = false;
-        System.out.println("Element  Frequency");
+        //initially assuming that the array has no duplicates.
+        //using "hasNoDuplicates" rather than "hasDuplicates" can make it easier to understand the logic.
+        boolean hasNoDuplicates = true;
         for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
             if (entry.getValue() > 1) {
-                hasDuplicates = true;
+                if (hasNoDuplicates) {
+                    System.out.println("Element  Frequency");
+                }
+                hasNoDuplicates = false; // Set the flag to false as value(frequency) is more than 1.
                 System.out.println(entry.getKey() + "        " + entry.getValue());
             }
         }
-        if (!hasDuplicates) {
+        if (hasNoDuplicates) {
             System.out.println("No duplicates found.");
         }
+        System.out.print("__________________________________");
     }
 }
